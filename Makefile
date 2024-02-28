@@ -19,6 +19,7 @@ install: clean
 	cp -r $(THEMES_FILES) $(THEMES_INSTALL_DIR)
 	# Install binaries
 	mkdir -p $(BIN_INSTALL_DIR) || true
+	chmod +x $(BIN_FILES)
 	cp $(BIN_FILES) $(BIN_INSTALL_DIR)
 
 uninstall:
