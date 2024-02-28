@@ -1,0 +1,342 @@
+#!/usr/bin/env bash
+# theme handling utility for global themes
+# author: cherrynoize
+# https://github.com/cherrynoize/dotfiles
+
+get_all_themes () {
+  find "$user_themes_dir"/* "$base_themes_dir"/* \
+       -maxdepth 0 -type f -iname "*$theme_ext" \
+       -exec sh -c 'f="$(basename {})" && echo "${f%.*}"' \;
+}
+
+# themes location
+config_dir="${XDG_CONFIG_HOME:-"$HOME/.config"}"
+user_themes_dir=${user_themes_dir:-"$config_dir/themes"}
+base_themes_dir="/etc/themes"
+current_theme_file=${current_theme_file:-"$HOME/.current-theme"}
+old_theme="$(cat "$current_theme_file")"
+theme_ext=".ini"
+
+# global theme history
+cache_dir="${XDG_CACHE_HOME:-"$HOME/.cache"}"
+hst_dir="$cache_dir/themes/hst"
+hst_file="$hst_dir/global-history"
+# maximum number of history entries
+hst_size="$(get_all_themes | sort -u | wc -l)"
+
+# active theme configuration
+theme_settings_dir="$HOME/.local/state/themes"
+active_theme_settings_link="current"
+active_theme_settings_full_path="$theme_settings_dir/$active_theme_settings_link$theme_ext"
+default_theme_settings_full_path="$user_themes_dir/.default$theme_ext"
+if [ ! -f "$default_theme_settings_full_path" ]; then
+  default_theme_settings_full_path="$base_themes_dir/.default$theme_ext"
+fi
+
+nid="6699" # notification id
+
+notification () {
+  if [ -n "$use_notification" ]; then
+    if [ -z "$no_icon" ]; then
+      icon="🖼 "
+    fi
+
+    title="${1:-"${icon}Theme $theme_name set"}"
+    body="$2"
+
+    notify-send -r "$nid" "$title" "$body"
+  fi
+}
+
+update_theme () {
+  echo "$theme_file" > "$current_theme_file"
+}
+
+update_history () {
+  cur_theme="${1:-"$theme_file"}"
+
+  # if new theme is the same as previous theme
+  if [ "$cur_theme" = "$old_theme" ]; then
+    return
+  fi
+
+  # update history entries
+  if [ -f "$hst_file" ]; then
+    # remove duplicate entries
+    sed -i "/$cur_theme/d" "$hst_file"
+    # remove old entries
+    hist_buf="$(tail -n $hst_size < "$hst_file")"
+    echo "$hist_buf" > "$hst_file"
+  fi
+
+  # append current theme to file
+  echo "$cur_theme" >> "$hst_file"
+}
+
+usage () {
+local program_name="$(basename -- "$0")"
+cat<<EOF
+usage: $program_name <command> [options] [theme|theme-name]
+commands:
+  show               show current theme
+  list               list available themes (in alphabetical order, user themes first then base themes)
+  recent             sort available themes by most recently used (remaining themes are sorted alphabetically)
+  name [theme]       show theme name (defaults to current theme)
+  prev               set previous theme
+  next               set next theme
+  random             set random theme
+  save <theme-name>  save current theme configuration in user dir
+  reset              reset theme configuration (overwrites unsaved changes)
+  reload             reload active theme
+  set <theme>        set theme
+  help               show this help message
+options:
+  -d|--dir [dir]     use theme directory
+  -t|--theme [theme] use theme (-t|--theme can be omitted after command)
+  -e|--ext [ext]     use theme file extension (defaults to none)
+  -n|--notification  show notifications
+  -I|--no-icon       do not use icons in notification
+  -h|--help          show this help message
+EOF
+}
+
+get_theme_name () {
+  "$(basename -- "$0")" get ${1:+--theme "$1"} Theme name
+}
+
+get_theme_full_path () {
+  _theme="$1"
+
+  if [ -f "$user_themes_dir/$_theme$theme_ext" ]; then
+    echo "$user_themes_dir/$_theme$theme_ext"
+    return
+  elif [ -f "$base_themes_dir/$_theme$theme_ext" ]; then
+    echo "$base_themes_dir/$_theme$theme_ext"
+    return
+  fi
+
+  echo "$(basename -- "$0"): unable to find theme '$_theme'" > /dev/stderr
+  exit 1
+}
+
+get_recently_used_themes () {
+  recent_themes="$(tac "$hst_file")"
+  printf "%s\n%s" "$recent_themes" "$(get_all_themes)" | awk '!a[$0]++'
+}
+
+backup () {
+  local filename="$1"
+
+  if [ -f "$filename" ]; then
+    mv "$filename" "$(backup "$filename.bak")"
+    filename+=".bak"
+  fi
+
+  echo "$filename"
+}
+
+do_cmd () {
+  current_theme="$(cat "$current_theme_file")"
+  mapfile -t themes < <(get_all_themes)
+
+  case "$1" in
+    current)
+      if [ -z "$show_dir" ]; then
+        echo "$current_theme"
+      else
+        echo "$user_themes_dir"
+      fi
+      ;;
+    path)
+      printf "%s\n" "${themes[@]}"
+      ;;
+    list)
+      for _theme in "${themes[@]}"; do
+        printf "%s\n" "$(basename -- "$_theme")"
+      done
+      ;;
+    recent)
+      get_recently_used_themes
+      ;;
+    name)
+      get_theme_name "$theme_file"
+      ;;
+    prev|next)
+      for ((i=0; i<${#themes[@]}; i++)); do
+        if [ "${themes[$i]}" = "$current_theme" ]; then
+          if [ "$1" = "prev" ]; then
+            new_index=$((i-1))
+          else
+            new_index=$((i+1))
+          fi
+          theme_file="${themes[$new_index]}"
+          do_cmd set
+        fi
+      done
+      ;;
+    random)
+      theme_file="$(random-file "$user_themes_dir" "$base_themes_dir" -I "$current_theme$theme_ext")"
+      theme_file="${theme_file%.*}"
+      do_cmd set
+      ;;
+    get)
+      if [ -n "$theme_file" ]; then
+        inifile="$(get_theme_full_path "$theme_file")" || exit 1
+      fi
+      inifile="${inifile:-"$active_theme_settings_full_path"}"
+      value="$(iniget "$inifile" "${@:2}")"
+      value="${value:-$(iniget "$default_theme_settings_full_path" "${@:2}")}"
+      echo "$value"
+      ;;
+    edit)
+      iniset "$active_theme_settings_full_path" "${args[@]:1}"
+      ;;
+    save)
+      if [ -z "$theme_file" ]; then
+        echo "usage: $(basename -- "$0") save <theme-name>" > /dev/stderr
+        exit 1
+      fi
+
+      _dest="$user_themes_dir/$theme_file$theme_ext"
+      if [ -f "$_dest" ]; then
+        echo "creating backup file: '$(backup "$_dest")'"
+      fi
+
+      cp "$active_theme_settings_full_path" "$_dest"
+      ;;
+    reset)
+      cp "$(get_theme_full_path "$current_theme")" "$active_theme_settings_full_path"
+      ;;
+    reload)
+      load_theme
+      ;;
+    set)
+      if [ -z "$theme_file" ]; then
+        return
+      fi
+
+      set_theme "$theme_file"
+      update_theme
+      load_theme
+      update_history "$theme_file"
+      theme_name="$(get_theme_name)" notification
+      ;;
+    *)
+      echo "theme: unknown command '$1'" > /dev/stderr
+      exit 1
+      ;;
+  esac
+}
+
+args=("$@")
+
+while [ -n "$1" ]; do
+  case "$1" in
+    help|-h|--help)
+      usage
+      exit
+      ;;
+    -d|--dir)
+      if [ -n "$2" ]; then
+        themes_dir="$2"
+        shift 2
+      else
+        show_dir=1
+        shift
+      fi
+      ;;
+    -t|--theme)
+      theme_file="$2"
+      shift 2
+      ;;
+    -e|--ext)
+      theme_ext="$2"
+      shift 2
+      ;;
+    -n|--notification)
+      use_notification=1
+      shift
+      ;;
+    -I|--no-icon)
+      no_icon=1
+      shift
+      ;;
+    -*)
+      echo "error: unknown option $1"
+      exit 1
+      ;;
+    *)
+      # set command first then theme name
+      if [ -z "$cmd" ]; then
+        cmd="$1"
+      elif [ -z "$theme_file" ] &&
+           [ "$cmd" != "get" ] &&
+           [ "$cmd" != "edit" ]; then
+        theme_file="$1"
+      else
+        break
+      fi
+      shift
+      ;;
+  esac
+done
+
+set_theme () {
+  if [ ! -d "$theme_settings_dir" ]; then
+    mkdir -p "$theme_settings_dir" || {
+      echo "$(basename -- "$0"): failed to create active configuration dir '$theme_settings_dir'" > /dev/stderr
+      return 5
+    }
+  fi
+
+  _theme_name="$1"
+  _theme_settings_file="$theme_settings_dir/${_theme_name}$theme_ext"
+
+  if [ ! -f "$_theme_settings_file" ]; then
+    _theme_file="$(get_theme_full_path "$_theme_name")" || exit 1
+    cp -r "$_theme_file" "$_theme_settings_file"
+  fi
+
+  switch-theme \
+    --custom \
+    "$_theme_name" \
+    "$theme_settings_dir" \
+    "$active_theme_settings_link" \
+    "$theme_ext"
+}
+
+load_theme () {
+  load_rc () {
+    local themerc="$(theme get Theme rc)"
+    if [ -n "$themerc" ] && [ "$themerc" != "" ]; then
+      . "$themerc"
+    fi
+  }
+
+  load_dock () {
+    local dock
+    declare -A dock
+    dock[enabled]="$(iniget "$active_theme_settings_full_path" Dock enabled)"
+
+    if [ "${dock[enabled]}" = true ]; then
+      dock launch
+    elif [ "${dock[enabled]}" = false ]; then
+      dock close
+    fi
+  }
+
+  load_wallpaper () {
+    switch-theme wallpaper "$(theme get Wallpaper theme)"
+  }
+
+  load_notifications () {
+    switch-theme notifications "$(theme get Notifications theme)"
+  }
+
+  load_rc
+  load_dock
+  load_wallpaper
+  load_notifications
+}
+
+do_cmd "$cmd" "$@"
