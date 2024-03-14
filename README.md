@@ -3,7 +3,7 @@
     <h3></h3>
 </div>
 
-<div align="center"> 
+<div align="center" style="display: flex; gap: 1em;">
 
 ![](https://img.shields.io/github/last-commit/cherrynoize/theme?&style=for-the-badge&color=FFB1C8&logoColor=D9E0EE&labelColor=292324)
 ![](https://img.shields.io/github/stars/cherrynoize/theme?style=for-the-badge&logo=andela&color=FFB686&logoColor=D9E0EE&labelColor=292324)
