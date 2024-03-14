@@ -11,9 +11,9 @@ get_all_themes () {
 
 # themes location
 config_dir="${XDG_CONFIG_HOME:-"$HOME/.config"}"
-user_themes_dir=${user_themes_dir:-"$config_dir/themes"}
-base_themes_dir="/etc/themes"
-current_theme_file=${current_theme_file:-"$HOME/.current-theme"}
+user_themes_dir="${USER_THEMES_DIR:-"$config_dir/themes"}"
+base_themes_dir="${BASE_THEMES_DIR:-"/etc/themes"}"
+current_theme_file="${current_theme_file:-"$HOME/.current-theme"}"
 old_theme="$(cat "$current_theme_file")"
 theme_ext=".ini"
 
