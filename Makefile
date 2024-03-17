@@ -23,6 +23,8 @@ install:
 	mkdir -p $(BIN_INSTALL_DIR) || true
 	chmod +x $(BIN_FILES)
 	cp $(BIN_FILES) $(BIN_INSTALL_DIR)
+	# Generate cached thumbnail images
+	genthumbcache
 
 uninstall:
 	# Remove themes

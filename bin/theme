@@ -3,12 +3,6 @@
 # author: cherrynoize
 # https://github.com/cherrynoize/dotfiles
 
-get_all_themes () {
-  find "$user_themes_dir"/* "$base_themes_dir"/* \
-       -maxdepth 0 -type f -iname "*$theme_ext" \
-       -exec sh -c 'f="$(basename {})" && echo "${f%.*}"' \;
-}
-
 # themes location
 config_dir="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 user_themes_dir="${USER_THEMES_DIR:-"$config_dir/themes"}"
@@ -17,12 +11,29 @@ current_theme_file="${current_theme_file:-"$HOME/.current-theme"}"
 old_theme="$(cat "$current_theme_file")"
 theme_ext=".ini"
 
+if [ ! -d "$user_themes_dir" ]; then
+  echo "warning: user themes dir '$user_themes_dir' not found" > /dev/stderr
+fi
+
+if [ ! -d "$base_themes_dir" ]; then
+  echo "error: themes dir '$base_themes_dir' not found" > /dev/stderr
+  exit 4
+fi
+
+all_themes="$(
+  find "$user_themes_dir"/* "$base_themes_dir"/* \
+       -maxdepth 0 -type f -iname "*$theme_ext" \
+       -exec basename {} \; \
+       | sed 's/'"$theme_ext"'$//' \
+       2>/dev/null
+)"
+
 # global theme history
 cache_dir="${XDG_CACHE_HOME:-"$HOME/.cache"}"
 hst_dir="$cache_dir/themes/hst"
 hst_file="$hst_dir/global-history"
 # maximum number of history entries
-hst_size="$(get_all_themes | sort -u | wc -l)"
+hst_size="$(sort -u <<< "$all_themes" | wc -l)"
 
 # active theme configuration
 theme_settings_dir="$HOME/.local/state/themes"
@@ -101,7 +112,8 @@ EOF
 }
 
 get_theme_name () {
-  "$(basename -- "$0")" get ${1:+--theme "$1"} Theme name
+  theme_file=${1:-"$theme_file"}
+  theme_get Theme name
 }
 
 get_theme_full_path () {
@@ -121,7 +133,7 @@ get_theme_full_path () {
 
 get_recently_used_themes () {
   recent_themes="$(tac "$hst_file")"
-  printf "%s\n%s" "$recent_themes" "$(get_all_themes)" | awk '!a[$0]++'
+  printf "%s\n%s" "$recent_themes" "$all_themes" | awk '!a[$0]++'
 }
 
 backup () {
@@ -135,9 +147,25 @@ backup () {
   echo "$filename"
 }
 
+theme_get () {
+  if [ -n "$theme_file" ]; then
+    inifile="$(get_theme_full_path "$theme_file")" || exit 1
+  fi
+  inifile="${inifile:-"$active_theme_settings_full_path"}"
+
+  if [ ! -f "$inifile" ]; then
+    echo "error: file '$inifile' not found" > /dev/stderr
+    exit 4
+  fi
+
+  value="$(iniget "$inifile" "$@")"
+  value="${value:-$(iniget "$default_theme_settings_full_path" "${@:2}")}"
+  echo "$value"
+}
+
 do_cmd () {
   current_theme="$(cat "$current_theme_file")"
-  mapfile -t themes < <(get_all_themes)
+  mapfile -t themes < <(echo "$all_themes")
 
   case "$1" in
     current)
@@ -180,13 +208,7 @@ do_cmd () {
       do_cmd set
       ;;
     get)
-      if [ -n "$theme_file" ]; then
-        inifile="$(get_theme_full_path "$theme_file")" || exit 1
-      fi
-      inifile="${inifile:-"$active_theme_settings_full_path"}"
-      value="$(iniget "$inifile" "${@:2}")"
-      value="${value:-$(iniget "$default_theme_settings_full_path" "${@:2}")}"
-      echo "$value"
+      theme_get "${@:2}"
       ;;
     edit)
       iniset "$active_theme_settings_full_path" "${args[@]:1}"

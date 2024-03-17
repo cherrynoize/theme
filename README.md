@@ -8,7 +8,7 @@
 ![](https://img.shields.io/github/last-commit/cherrynoize/theme?&style=for-the-badge&color=FFB1C8&logoColor=D9E0EE&labelColor=292324)
 ![](https://img.shields.io/github/stars/cherrynoize/theme?style=for-the-badge&logo=andela&color=FFB686&logoColor=D9E0EE&labelColor=292324)
 ![](https://img.shields.io/github/repo-size/cherrynoize/theme?color=CAC992&label=SIZE&logo=googledrive&style=for-the-badge&logoColor=D9E0EE&labelColor=292324)
-![](https://img.shields.io/badge/need-wpgtk-green?style=for-the-badge&color=CCE8E9&logoColor=D9E0EE&labelColor=292324) 
+![](https://img.shields.io/badge/need-wpgtk-green?style=for-the-badge&color=CCE8E9&logoColor=D9E0EE&labelColor=292324)
 
 </div>
 
@@ -111,17 +111,10 @@ themes.
 > Use option `--recent=false` to sort alphabetically instead of
 > by recently used.
 
-> Note: the theme and wall picker both will be kinda slow to
-> start the first few times, that is because it's creating
-> thumbnail for all wallpaper images. It speeds up soon enough
-> (proportional to the number of images in your wallpaper dir).
-> The only way to solve this would be to use the original image
-> as a background for a `rofi` element instead passing the way
-> we currently are. (If you know how to do that reach out.)
-
-Global themes are configuration files in
-[.config/themes](../.config/themes) and they can be easily edited,
-created or removed manually.
+Global themes are plain-text configuration files found in
+[.config/themes](../.config/themes). You can just open them in
+your favorite editor, modify them, create new ones and remove
+existing ones.
 
 > Though provided global themes are still primitive, the
 > infrastructure is already capable of supporting endlessly
