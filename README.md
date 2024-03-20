@@ -12,6 +12,10 @@
 
 </div>
 
+As I tried to rationalize all the time I put into building my
+dotfiles, I realized that I had to turn all the theme handling
+utilities into a separate package and that would make me happy.
+
 ## 🧱 Dependencies
 
 ```
