@@ -16,11 +16,15 @@ poured into my dotfiles and make me happy.
 
 </div>
 
+<div align="justify">
+
 **Theme** is a set of utilities for handling global and local
 themes within your system. **Global themes** are defined by *ini*
 configuration files which define specifics adopted system-wide,
 including **local themes** which are themes for a specific
 context (*say, for notifications*).
+
+</div>
 
 ## 🧱 Dependencies
 
