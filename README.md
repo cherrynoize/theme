@@ -1,8 +1,8 @@
 ## Currently wallpapers are still in my [dotfiles](https://github.com/cherrynoize/dotfiles) repo, I will be sure to pull everything in here soon enough
 
 <div align="center">
+    <strong>Global themes for WMs</strong>
     <h1>🌟 Theme</h1>
-    <h2>Global themes for WMs</h2>
     <h3></h3>
 
 ![](https://img.shields.io/github/last-commit/cherrynoize/theme?logo=github&style=for-the-badge&color=FFB1C8&logoColor=D9E0EE&labelColor=292324)
