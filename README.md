@@ -12,9 +12,9 @@
 In the hope this can help me rationalize all the time
 poured into my dotfiles and make me happy.
 
-</div>
+## Themes for WMs
 
-## ❓ What is *theme*?
+</div>
 
 **Theme** is a set of utilities for handling global and local
 themes within your system. **Global themes** are defined by *ini*
