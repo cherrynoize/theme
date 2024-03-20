@@ -1,7 +1,6 @@
 ## Currently wallpapers are still in my [dotfiles](https://github.com/cherrynoize/dotfiles) repo, I will be sure to pull everything in here soon enough
 
 <div align="center">
-    <strong>Global themes for WMs</strong>
     <h1>🌟 Theme</h1>
     <h3></h3>
 
@@ -9,6 +8,8 @@
 ![](https://img.shields.io/github/stars/cherrynoize/theme?style=for-the-badge&logo=andela&color=FFB686&logoColor=D9E0EE&labelColor=292324)
 ![](https://img.shields.io/github/repo-size/cherrynoize/theme?color=CAC992&label=SIZE&logo=googledrive&style=for-the-badge&logoColor=D9E0EE&labelColor=292324)
 ![](https://img.shields.io/badge/need-wpgtk-green?style=for-the-badge&color=CCE8E9&logoColor=D9E0EE&labelColor=292324)
+
+#### Global themes for WMs
 
 In the hope this can help me rationalize all the time
 poured into my dotfiles and make me happy.
