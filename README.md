@@ -1,7 +1,6 @@
 ## Currently wallpapers are still in my [dotfiles](https://github.com/cherrynoize/dotfiles) repo, I will be sure to pull everything in here soon enough
 
 <div align="center">
-    <h3>Global themes for WMs</h3>
     <h1>🌟 Theme</h1>
     <h3></h3>
 
@@ -14,6 +13,14 @@ In the hope this can help me rationalize all the time
 poured into my dotfiles and make me happy.
 
 </div>
+
+## ❓ What is *theme*?
+
+**Theme** is a set of utilities for handling global and local
+themes within your system. **Global themes** are defined by *ini*
+configuration files which define specifics adopted system-wide,
+including **local themes** which are themes for a specific
+context (*say, for notifications*).
 
 ## 🧱 Dependencies
 
