@@ -4,7 +4,6 @@
     dotfiles, I realized that turning all the theme handling
     utilities into a separate package would make me happy.
     </h4>
-
     <h1>Global themes for WMs</h1>
     <h3></h3>
 
