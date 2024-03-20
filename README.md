@@ -26,18 +26,19 @@ context (*say, for notifications*).
 
 </div>
 
-## 🧱 Dependencies
-
-```
-# From the official repos:
-bash
-# From the AUR:
-wpgtk
-```
-
 ## 🎨 Themes
 
 > This section is currently a stub... Please, come back later.
+
+## 🧱 Dependencies
+
+```
+# Official repos (Arch)
+bash
+
+# AUR
+wpgtk
+```
 
 ## 🔧 Install
 
