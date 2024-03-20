@@ -33,10 +33,10 @@ context (*say, for notifications*).
 ## 🧱 Dependencies
 
 ```
-# Official repos (Arch)
+# official repos (arch)
 bash
 
-# AUR
+# aur
 wpgtk
 ```
 
