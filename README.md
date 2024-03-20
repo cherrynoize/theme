@@ -10,11 +10,13 @@
 ![](https://img.shields.io/github/repo-size/cherrynoize/theme?color=CAC992&label=SIZE&logo=googledrive&style=for-the-badge&logoColor=D9E0EE&labelColor=292324)
 ![](https://img.shields.io/badge/need-wpgtk-green?style=for-the-badge&color=CCE8E9&logoColor=D9E0EE&labelColor=292324)
 
-</div>
-
+<h3>
 As I tried to rationalize all the time I put into building my
 dotfiles, I realized that I had to turn all the theme handling
 utilities into a separate package and that would make me happy.
+</h3>
+
+</div>
 
 ## 🧱 Dependencies
 
