@@ -21,6 +21,10 @@ bash
 wpgtk
 ```
 
+## 🎨 Themes
+
+> This section is currently a stub... Please, come back later.
+
 ## 🔧 Install
 
 ```
@@ -55,7 +59,6 @@ configurations which include the configuration/theme for
 several single contexts. A global theme can be a collection of
 multiple themes to be set each for the appropriate context
 
-
 **Theme** is based upon
 [`wpgtk`](https://github.com/deviantfero/wpgtk)
 for easier global theming and automatic colorscheme generation
@@ -68,10 +71,7 @@ if you want to start editing themes or creating your own.
 Also, for better portability template symlinks are not hardcoded
 and can be (re-)generated at anytime using `fix-wpg-templates`.
 
-## 🎨 Themes
-
-Themes are currently in alpha so please be nice. I'm setting up
-themes for everything - just be patient.
+## 🛠 Usage
 
 To switch between themes:
 
