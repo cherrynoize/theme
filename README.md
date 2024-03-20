@@ -268,31 +268,7 @@ on this but, please, if anyone has a specific request provide me
 with a metadata sample (output of `playerctl --player="$player"
 metadata mpris:artUrl`) and I'll add it.
 
-### 🔩 Troubleshooting
-
-In case something's not working as expected, or if you suddenly
-notice a lag in your system and you don't know what's causing it:
-
-```
-unfuck everything
-```
-
-This should help. If it doesn't, you'll have to find the issue
-and actually do something about it.
-
 ## 📋 TODO
-
-### Install and configuration
-
-- Installation script
-- Finish making initrc
-
-### Bar
-
-- Auto memorize bar status (open or closed) between sessions
-- Fix bar auto closing on resume after sleep
-
-### Wallpapers
 
 - Implement wallpaper history for each theme and start sorting
 by most recent in `wall-picker`
@@ -303,17 +279,11 @@ removed
 - Cut out border from wallpapers in
 [`meranii`](../.wallpaper-themes/meranii) theme
 
-### Themes
-
 - Make `switch-mode` keep both `-dark` and `-light` versions
 and use a suffix-less link to avoid this dizzy switching back
 and forth in commits just because a different mode is set.
 (Be sure to have it check for link destination instead of
 existance in `get_cur_mode`.)
-
-### Support
-
-- Shortcuts/commands usage popup window
 
 ## ✨ Contribute
 
@@ -323,34 +293,10 @@ found more.
 
 If you feel like you have something to add please do.
 
-### Community themes
-
-If you feel like it, you can submit your own theme. I'm not
-exactly sure what I'm going to do with those but I would like
-people to be able to share and browse custom themes.
-Or I might add them to the main repo if they fit.
-
-Even the wallpapers alone are worth consideration if it's a well
-curated selection of at least 2 or 3 for both light and
-dark versions.
-
 ## 💕 Sponsor
 
 [**Buy me a coke 💙**](https://cherrynoize.github.io/#/contribute)
 
-## 🙏 Thanks
+## Thanks for using *theme*
 
-- [gh0stzk's dotfiles](https://github.com/gh0stzk/dotfiles) for
-inspiration as well as a lot of code stolen especially for the
-Rofi theme selector
-- [wacca〇わっか](https://www.pixiv.net/en/users/46612726) for
-her amazing collection
-([meranii theme](../.wallpaper-themes/meranii))
-- Also I've removed some watermarks from a few wallpapers just
-for aesthetic reasons, please don't get mad at me. I'll be glad
-to add a link to your original work if you reach out.
-
-## And thanks to you for using my dotfiles
-
-*If you like them please consider giving us a star. Bye!*
-
+*Hope you like it!*
