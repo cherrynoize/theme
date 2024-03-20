@@ -1,5 +1,8 @@
+## Currently wallpapers are still in my [dotfiles](https://github.com/cherrynoize/dotfiles) repo, I will be sure to pull everything in here soon enough
+
 <div align="center">
-    <h1>Global themes for WMs</h1>
+    <h1>🌟 Theme</h1>
+    <h2>Global themes for WMs</h2>
     <h3></h3>
 
 ![](https://img.shields.io/github/last-commit/cherrynoize/theme?logo=github&style=for-the-badge&color=FFB1C8&logoColor=D9E0EE&labelColor=292324)
@@ -269,9 +272,29 @@ found more.
 
 If you feel like you have something to add please do.
 
+### Community themes
+
+If you feel like it, you can submit your own theme. I'm not
+exactly sure what I'm going to do with those but I would like
+people to be able to share and browse custom themes.
+Or I might add them to the main repo if they fit.
+
+Even the wallpapers alone are worth consideration if it's a well
+curated selection of at least 2 or 3 for both light and
+dark versions.
+
 ## 💕 Sponsor
 
 [**Buy me a coke 💙**](https://cherrynoize.github.io/#/contribute)
+
+## 🙏 Thanks
+
+- [wacca〇わっか](https://www.pixiv.net/en/users/46612726) for
+her amazing collection
+([meranii theme](../.wallpaper-themes/meranii))
+- Also I've removed some watermarks from a few wallpapers just
+for aesthetic reasons, please don't get mad at me. I'll be glad
+to add a link to your original work if you reach out.
 
 ## Thanks for using *theme*
 
