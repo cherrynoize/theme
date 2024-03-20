@@ -308,4 +308,4 @@ her amazing collection
 for aesthetic reasons, please don't get mad at me. I'll be glad
 to add a link to your original work if you reach out.
 
-## Thanks for using *theme*
+### Thanks for using *theme*
