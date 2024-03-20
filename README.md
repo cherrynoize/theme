@@ -1,8 +1,7 @@
 ## Currently wallpapers are still in my [dotfiles](https://github.com/cherrynoize/dotfiles) repo, I will be sure to pull everything in here soon enough
 
 <div align="center">
-### Global themes for WMs
-
+    <h3>Global themes for WMs</h3>
     <h1>🌟 Theme</h1>
     <h3></h3>
 
