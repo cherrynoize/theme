@@ -147,6 +147,10 @@ backup () {
   echo "$filename"
 }
 
+get_default_value () {
+  iniget "$default_theme_settings_full_path" "$@"
+}
+
 theme_get () {
   if [ -n "$theme_file" ]; then
     inifile="$(get_theme_full_path "$theme_file")" || exit 1
@@ -159,7 +163,9 @@ theme_get () {
   fi
 
   value="$(iniget "$inifile" "$@")"
-  value="${value:-$(iniget "$default_theme_settings_full_path" "${@:2}")}"
+  if [ -z "$value" ]; then
+    value="$(get_default_value "$@")"
+  fi
   echo "$value"
 }
 
@@ -207,11 +213,15 @@ do_cmd () {
       theme_file="${theme_file%.*}"
       do_cmd set
       ;;
+    default)
+      get_default_value "${@:2}"
+      ;;
     get)
       theme_get "${@:2}"
       ;;
     edit)
-      iniset "$active_theme_settings_full_path" "${args[@]:1}"
+      iniset "$active_theme_settings_full_path" "${args[@]:1}" 2>/dev/null ||
+      inicreate "$active_theme_settings_full_path" "${args[@]:1}"
       ;;
     save)
       if [ -z "$theme_file" ]; then
@@ -293,7 +303,8 @@ while [ -n "$1" ]; do
         cmd="$1"
       elif [ -z "$theme_file" ] &&
            [ "$cmd" != "get" ] &&
-           [ "$cmd" != "edit" ]; then
+           [ "$cmd" != "edit" ] &&
+           [ "$cmd" != "default" ]; then
         theme_file="$1"
       else
         break
@@ -320,6 +331,7 @@ set_theme () {
   fi
 
   switch-theme \
+    --delete-nonlinks \
     --custom \
     "$_theme_name" \
     "$theme_settings_dir" \

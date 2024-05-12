@@ -12,7 +12,7 @@ HIDDEN_THEME_FILES := $(BASE_THEMES_DIR)/.default.ini
 BIN_FILES := $(wildcard $(BIN_DIR)/*)
 
 # Define targets
-.PHONY: install uninstall clean
+.PHONY: install update-bin uninstall clean
 
 install:
 	# Install themes
@@ -25,6 +25,15 @@ install:
 	cp $(BIN_FILES) $(BIN_INSTALL_DIR)
 	# Generate cached thumbnail images
 	genthumbcache
+
+update-bin:
+	# Update binaries
+	if [ ! -d $(BIN_INSTALL_DIR) ]; then \
+		echo "Failed to update binaries: install dir $(BIN_INSTALL_DIR) does not exist"; \
+		exit 1; \
+	fi
+	chmod +x $(BIN_FILES)
+	cp $(BIN_FILES) $(BIN_INSTALL_DIR)
 
 uninstall:
 	# Remove themes

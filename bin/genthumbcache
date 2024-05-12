@@ -1,0 +1,13 @@
+#!/bin/sh
+# caches thumbnails for every wallpaper in every theme
+# https://github.com/cherrynoize/dotfiles
+# Author: cherrynoize
+
+wallpaper_themes_dir="${WALL_THEMES_DIR:-"$HOME/.wallpaper-themes"}"
+thumbnail_cache_dir="${1:-"$HOME/.cache/themes/thumbnails"}"
+
+for theme in "$wallpaper_themes_dir"/*; do
+  for wall in "$theme/wallpaper"*/*; do
+    gen-thumbnail "$wall" "$thumbnail_cache_dir"
+  done
+done

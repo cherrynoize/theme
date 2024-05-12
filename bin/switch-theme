@@ -73,6 +73,7 @@ options:
   -n|--notification  show notifications
   -I|--no-icon       do not use icons in notification
   -q|--quiet         quiet mode
+  --delete-nonlinks  unsets current theme even if not a symlink
   -h|--help          show this help message
 EOF
 }
@@ -140,7 +141,7 @@ set_theme () {
       return
     fi
 
-    if [ ! -L "$active_theme_link" ]; then
+    if [ ! "$delete_nonlinks" = "1" ] && [ ! -L "$active_theme_link" ]; then
       echo "$(basename -- "$0"): cannot unset current theme: '$active_theme_link' is not a symlink" > /dev/stderr
       exit 4
     fi
@@ -303,6 +304,10 @@ while [ -n "$1" ]; do
       ;;
     -q|--quiet)
       quiet=1
+      shift
+      ;;
+    --delete-nonlinks)
+      delete_nonlinks=1
       shift
       ;;
     --custom)
