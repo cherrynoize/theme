@@ -36,8 +36,8 @@ bash rofi
 wpgtk pywalfox
 ```
 
-^ **Rofi** is only needed for the `wall-picker` and
-^ `theme-picker` commands.
+>**Rofi** is only needed for the `wall-picker` and
+>`theme-picker` commands.
 
 To install all of the above (*on Arch*) run:
 
@@ -74,8 +74,8 @@ User themes can be set in `~/.config/themes`. Or you can
 specify custom paths by defining a `BASE_THEMES_DIR` and
 `USER_THEMES_DIR` variable respectively.
 
-^ If you're using my [dotfiles](https://github.com/cherrynoize/dotfiles)
-^ you can set these in the [`.initrc`](.initrc) file.
+>If you're using my [dotfiles](https://github.com/cherrynoize/dotfiles)
+>you can set these in the [`.initrc`](.initrc) file.
 
 Though provided global themes are still very simple, the
 infrastructure is already capable of supporting endlessly
