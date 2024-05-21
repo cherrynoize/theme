@@ -15,11 +15,11 @@
 
 <div align="justify">
 
-**Theme** is a set of utilities for handling global and local
-themes within your system. **Global themes** are defined by *ini*
+**Theme** is a set of utilities for handling custom themes
+within your system. **Global themes** are defined by *ini*
 configuration files which define specifics adopted system-wide,
-including **local themes** which are themes for a specific
-context (*say, for notifications*).
+including **context themes** which are themes for a specific
+context (*i.e: say, for notifications*).
 
 </div>
 
