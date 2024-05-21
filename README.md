@@ -61,6 +61,9 @@ make install-bin
 make install-themes
 ```
 
+> You can easily use `theme` in your own dotfiles by just
+> installing binary files and adding your own system themes.
+
 To uninstall:
 
 ```
