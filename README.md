@@ -9,9 +9,6 @@
 ![](https://img.shields.io/github/repo-size/cherrynoize/theme?color=CAC992&label=SIZE&logo=googledrive&style=for-the-badge&logoColor=D9E0EE&labelColor=292324)
 ![](https://img.shields.io/badge/need-wpgtk-green?style=for-the-badge&color=CCE8E9&logoColor=D9E0EE&labelColor=292324)
 
-In the hope this can help me rationalize all the time
-poured into my dotfiles and make me happy.
-
 ## Themes for WMs
 
 </div>
@@ -26,18 +23,27 @@ context (*say, for notifications*).
 
 </div>
 
-## 🎨 Themes
+## 🎨 Default themes
 
 > This section is currently a stub... Please, come back later.
 
 ## 🧱 Dependencies
 
 ```
-# official repos (arch)
-bash
+# Official repos (Arch):
+bash rofi
+# AUR:
+wpgtk pywalfox
+```
 
-# aur
-wpgtk
+^ **Rofi** is only needed for the `wall-picker` and
+^ `theme-picker` commands.
+
+To install all of the above (*on Arch*) run:
+
+```
+sudo pacman -S bash rofi
+yay -S wpgtk pywalfox
 ```
 
 ## 🔧 Install
@@ -58,21 +64,30 @@ make uninstall
 
 ### Global themes
 
-By default, base global themes are installed in `/etc/themes`.
+Global themes are plain-text configuration files found in
+[.config/themes](../.config/themes). You can just open them in
+any text editor, modify them, create new ones and remove
+existing ones.
+
+By default, system global themes are installed in `/etc/themes`.
 User themes can be set in `~/.config/themes`. Or you can
-specify custom paths by editing the `BASE_THEMES_DIR` and
-`USER_THEMES_DIR` variables in [`.initrc`](.initrc).
+specify custom paths by defining a `BASE_THEMES_DIR` and
+`USER_THEMES_DIR` variable respectively.
 
-### Local themes
+^ If you're using my [dotfiles](https://github.com/cherrynoize/dotfiles)
+^ you can set these in the [`.initrc`](.initrc) file.
 
-> Note: *local* does not refer to **user** themes. Both base
-> and user themes are **global** themes.
+Though provided global themes are still very simple, the
+infrastructure is already capable of supporting endlessly
+complex themes. You just need to set them up.
 
-Local themes are single context themes. Global themes are
-complex (as in containing multiple separate objects)
-configurations which include the configuration/theme for
-several single contexts. A global theme can be a collection of
-multiple themes to be set each for the appropriate context
+### Context themes
+
+Themes can be set for a single context, such as `wallpaper`,
+`bspwm`, `dunst`, etc.
+
+Global themes are, at the very core, configuration files setting
+multiple themes for separate contexts.
 
 **Theme** is based upon
 [`wpgtk`](https://github.com/deviantfero/wpgtk)
@@ -80,18 +95,17 @@ for easier global theming and automatic colorscheme generation
 with `pywal`.
 
 You're going to need to refer to the
-[wiki](https://github.com/deviantfero/wpgtk/wiki)
-if you want to start editing themes or creating your own.
-
-Also, for better portability template symlinks are not hardcoded
-and can be (re-)generated at anytime using `fix-wpg-templates`.
+[Wpgtk wiki](https://github.com/deviantfero/wpgtk/wiki)
+if you want to start editing context themes or creating your own.
 
 ## 🛠 Usage
+
+### Switching between themes (for a single context)
 
 To switch between themes:
 
 ```
-switch-theme [thing-to-change-theme-for] [new-theme]
+switch-theme [context] [theme]
 ```
 
 List items that have themes:
@@ -100,11 +114,41 @@ List items that have themes:
 switch-theme -l
 ```
 
-And list themes available for given item (or context):
+And list themes available for given context:
 
 ```
 switch-theme [context] -l
 ```
+
+### Global themes
+
+#### Switching between global themes (terminal)
+
+Set a new theme:
+
+```
+theme set [theme]
+```
+
+List currently available themes:
+
+```
+theme list
+```
+
+For more options run:
+
+```
+theme help
+```
+
+#### Switching between global themes (GUI)
+
+You can run `theme-picker` to switch between available system
+and user defined global themes.
+
+> Use option `--recent=false` to sort alphabetically instead of
+> by recently used.
 
 ### Dark/light mode
 
@@ -118,140 +162,23 @@ to switch for or a specific mode (light or dark) to be set.
 > **Note**: light mode is in beta and some stuff does not look
 great. Have a look at the [known bugs](#-known-bugs) section.
 
-### Global themes
-
-You can run `theme-picker` to switch between available global
-themes.
-
-> Use option `--recent=false` to sort alphabetically instead of
-> by recently used.
-
-Global themes are plain-text configuration files found in
-[.config/themes](../.config/themes). You can just open them in
-your favorite editor, modify them, create new ones and remove
-existing ones.
-
-> Though provided global themes are still primitive, the
-> infrastructure is already capable of supporting endlessly
-> complex themes. You just need to set them up.
-
-### wpgtk
-
-<details>
-<summary></summary>
-
-![preview](images/wpgtk_preview1.mp4)
-
-![screenshot](images/wpgtk1.png)
-
-</details>
-
-### Dash
-
-<details>
-<summary></summary>
-
-![preview](images/dash_ani1.gif)
-
-![screenshot](images/dash1.png)
-
-</details>
-
-## 🛠 Usage
-
->⚠ Please do not use binaries or shell aliases unless you
->understand what they do. Take the time to inspect the code first.
-
-### ⌘ Useful commands, aliases & shortcuts
-
-You can find all binary files in `~/bin` and `~/.local/bin`,
-shell aliases in `~/.config/fish/config.fish` and keyboard
-shortcuts in `.config/sxhkd/sxhkdrc`. Compiling an extensive
-shortcuts/commands help is in the [`TODO`](#-todo) list.
-
-<details>
-<summary>This is just some basic commands to get you
-started.</summary>
-
-#### Spawn a terminal window
-
-    "$TERMINAL" # Super+shift
-
-#### Application launcher
-
-    rofi -show drun # Super+x
-
-#### Run prompt
-
-    rofi -show run # Super+r
+### ⌘ General commands
 
 #### Theme selector
 
-    theme-picker # Super+space
+    theme-picker
 
-#### Switch between selected theme's wallpapers
+#### Wallpaper picker
 
-    wall-picker # Super+ctrl+space
+    wall-picker
 
 #### Random wallpaper
 
-    change-wallpaper # Super+Ctrl+w
+    change-wallpaper
 
 #### Dark mode on/off
 
-    switch-mode # Super+<
-
-#### Toggle dock
-
-    dock toggle # Super+z
-
-#### Launch browser
-
-    "$BROWSER" # Super+Alt+w
-
-#### Text editor
-
-    launch-nvim # use 'nvim' as an alias fish/bash
-
-#### Fix common issues
-
-    unfuck everything # Super+Shift+Esc
-
-### ⌨ Keys
-
-#### Neovim
-
-    {Alt,Shift}+Tab            Move to next/previous tab
-    Space;{Shift}+Tab          Move to next/previous buffer
-    Alt+{h,j,k,l}              Move to adjacent window
-    Ctrl+{h,j,k,l}             Move to adjacent window (wraparound)
-    Ctrl+{Left,Up,Down,Right}  Resize window
-    Space                      Help menu
-
-#### Rofi
-
-    {Tab,Shift}+Tab  Move to next/previous entry
-    h,j,k,l          Vi-like keybindings for moving around
-    Alt+{h,j,k,l}    Where there's also a searchbar
-
-</details>
-
-### 📔 Tricks & tips
-
-#### Auto-refresh sudo timeout
-
-`sudo` privilege timeout for the shell is refreshed with `sudo
--v`. `fish` already has [an abbreviation set](../.config/fish/fishrc)
-to replace `sudo` with `sudo -v; sudo` so that it gets updated
-each time. However, I find that cumbersome as well as annoying
-to have that prefix to each command and it doesn't work well
-with auto-completion/suggestions as well as with other
-abbreviations, so you can call `sd` rather than `sudo`
-to avoid all that. (Also, in case you're wondering, you cannot
-use a function because that would enter an infinite loop.)
-
-In case it conflicts with other programs in your system, just use
-`sudo`.
+    switch-mode
 
 ### 🐛 Known bugs
 
