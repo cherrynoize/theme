@@ -19,7 +19,7 @@
 within your system. **Global themes** are defined by *ini*
 configuration files which define specifics adopted system-wide,
 including **context themes** which are themes for a specific
-context (*i.e: say, for notifications*).
+context (*say, for notifications*).
 
 </div>
 
