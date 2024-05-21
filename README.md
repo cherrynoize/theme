@@ -54,6 +54,13 @@ cd theme
 make clean install
 ```
 
+If you only want to install binaries or themes, respectively:
+
+```
+make install-bin
+make install-themes
+```
+
 To uninstall:
 
 ```

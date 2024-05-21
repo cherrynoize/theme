@@ -12,17 +12,21 @@ HIDDEN_THEME_FILES := $(BASE_THEMES_DIR)/.default.ini
 BIN_FILES := $(wildcard $(BIN_DIR)/*)
 
 # Define targets
-.PHONY: install update-bin uninstall clean
+.PHONY: install install-bin install-themes update-bin uninstall clean
 
-install:
-	# Install themes
-	mkdir -p $(THEMES_INSTALL_DIR) || true
-	cp -r $(THEMES_FILES) $(THEMES_INSTALL_DIR)
-	cp -r $(HIDDEN_THEME_FILES) $(THEMES_INSTALL_DIR)
+install: install-bin install-themes
+
+install-bin:
 	# Install binaries
 	mkdir -p $(BIN_INSTALL_DIR) || true
 	chmod +x $(BIN_FILES)
 	cp $(BIN_FILES) $(BIN_INSTALL_DIR)
+
+install-themes:
+	# Install themes
+	mkdir -p $(THEMES_INSTALL_DIR) || true
+	cp -r $(THEMES_FILES) $(THEMES_INSTALL_DIR)
+	cp -r $(HIDDEN_THEME_FILES) $(THEMES_INSTALL_DIR)
 	# Generate cached thumbnail images
 	genthumbcache
 
