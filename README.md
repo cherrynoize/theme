@@ -1,5 +1,3 @@
-## Currently wallpapers are still in my [dotfiles](https://github.com/cherrynoize/dotfiles) repo, I will be sure to pull everything in here soon enough
-
 <div align="center">
     <h1>🌟 Theme</h1>
     <h3></h3>
@@ -26,6 +24,7 @@ context (*say, for notifications*).
 ## 🎨 Default themes
 
 > This section is currently a stub... Please, come back later.
+> You can check themes out by running `theme-picker`.
 
 ## 🧱 Dependencies
 
