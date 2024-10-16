@@ -1,6 +1,5 @@
 <div align="center">
-    <h1>🌟 Theme</h1>
-    <h2>Themes for WMs</h2>
+    <h1>🌟 Theme | Themes for WMs</h1>
     <h3></h3>
 
 ![](https://img.shields.io/github/last-commit/cherrynoize/theme?logo=github&style=for-the-badge&color=FFB1C8&logoColor=D9E0EE&labelColor=292324)
@@ -16,7 +15,7 @@
 within your system. **Global themes** are defined by *ini*
 configuration files which define specifics adopted system-wide,
 including **context themes** which are themes for a specific
-context (*say, for notifications*).
+context (*e.g: notifications*).
 
 </div>
 
