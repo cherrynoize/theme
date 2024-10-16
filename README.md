@@ -1,6 +1,7 @@
 <div align="center">
-    <h1>🌟 Theme | Themes for WMs</h1>
+    <h1>🎨 Theme</h1>
     <h3></h3>
+    <h2>🌟 Themes for WMs</h1>
 
 ![](https://img.shields.io/github/last-commit/cherrynoize/theme?logo=github&style=for-the-badge&color=FFB1C8&logoColor=D9E0EE&labelColor=292324)
 ![](https://img.shields.io/github/stars/cherrynoize/theme?style=for-the-badge&logo=andela&color=FFB686&logoColor=D9E0EE&labelColor=292324)
