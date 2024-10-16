@@ -2,17 +2,18 @@
 # rofi theme selector
 # https://github.com/cherrynoize/dotfiles
 # Author:= cherrynoize
-# Thanks:= https://github.com/gh0stzk/dotfiles
 
-wallpaper_themes_dir="${WALL_THEMES_DIR:-"$HOME/.wallpaper-themes"}"
+wallpaper_themes_base_dir="/etc/themes/wallpapers"
+wallpaper_themes_user_dir="${WALL_THEMES_DIR:-"$HOME/.wallpaper-themes"}"
 thumbnail_cache_dir="$HOME/.cache/themes/thumbnails"
 current_theme="$(theme current)"
-wallpaper_dir="$wallpaper_themes_dir/$current_theme/wallpaper"
+wallpaper_base_dir="$wallpaper_themes_base_dir/$current_theme/wallpaper"
+wallpaper_user_dir="$wallpaper_themes_user_dir/$current_theme/wallpaper"
 
 rofi_cmd="rofi -dmenu -i -theme ~/.config/rofi/picker/wall-picker.rasi"
 
 launch_rofi () {
-  for wall in "$wallpaper_dir"/*; do
+  for wall in "$wallpaper_base_dir"/* "$wallpaper_user_dir"/*; do
     thumbnail="$(gen-thumbnail "$wall" "$thumbnail_cache_dir")"
     echo -en "$wall\x00icon\x1f$thumbnail\n"
   done | $rofi_cmd -selected-row "${selected_index:-0}"

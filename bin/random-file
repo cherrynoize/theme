@@ -25,4 +25,4 @@ done
 
 [ "${#paths}" = "0" ] && paths+=(".")
 
-ls "${paths[@]}" "${ignore_opts[@]}" | sort -R | grep -vf <(printf "%s:\n" "${paths[@]}") | grep -v -e '^$' | head -1
+ls "${paths[@]}" "${ignore_opts[@]}" | sort -R | grep -vf <(printf "%s:\n" "${paths[@]}") | grep -v -e '^$' | head -1 || exit 1

@@ -126,7 +126,8 @@ set_theme () {
     remove_active_theme_link
 
     # point link to new theme
-    ln -s "$(get_new_theme_with_ext)" "$active_theme_link"
+    echo setting: 'ln -s' "${themes_dir:+"$themes_dir/"}$(get_new_theme_with_ext)" "$active_theme_link"
+    ln -s "${themes_dir:+"$themes_dir/"}$(get_new_theme_with_ext)" "$active_theme_link"
   }
 
   enforce_old_theme_mode () {
@@ -137,7 +138,7 @@ set_theme () {
   }
 
   remove_active_theme_link () {
-    if [ ! -e "$active_theme_link" ]; then
+    if [ ! -L "$active_theme_link" ] && [ ! -e "$active_theme_link" ]; then
       return
     fi
 
@@ -189,7 +190,8 @@ run_command () {
   theme_ext="$2"
 
   active_theme_link_name_with_ext="$active_theme_link_name$theme_ext"
-  active_theme_link="${themes_dir:+"$themes_dir/"}$active_theme_link_name_with_ext"
+  theme_link_dir="${active_theme_link_dir:-"$themes_dir"}"
+  active_theme_link="${theme_link_dir:+"$theme_link_dir/"}$active_theme_link_name_with_ext"
 
   current_theme="$(get_current_theme)"
 
@@ -379,11 +381,21 @@ case "$_ctx" in
     post_exec+="$4"
     ;;
   wallpaper)
-    themes_dir="$HOME/.wallpaper-themes"
+    themes_user_dir="$HOME/.wallpaper-themes"
+    themes_base_dir="/etc/themes/wallpapers"
+
+    wallpaper_dir="$themes_user_dir/$new_theme_name/wallpaper"
+    if [ -d "$wallpaper_dir" ] && [ -n "$(ls -A "$wallpaper_dir")" ]; then
+      themes_dir="$themes_user_dir"
+    else
+      themes_dir="$themes_base_dir"
+    fi
+
+    active_theme_link_dir=("$themes_user_dir")
     active_theme_link_names=("current")
     theme_exts=("")
     # set history size to current number of themes
-    hst_size="$(($(ls "$themes_dir" | wc -l) - 1))"
+    hst_size="$(($(ls "$themes_base_dir" "$themes_user_dir" | wc -l) - 1))"
     post_exec+="change-wallpaper -n -v;"
     ;;
   eww)

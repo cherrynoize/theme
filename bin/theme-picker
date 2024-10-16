@@ -2,9 +2,9 @@
 # rofi theme selector
 # https://github.com/cherrynoize/dotfiles
 # Author:= cherrynoize
-# Thanks:= https://github.com/gh0stzk/dotfiles
 
-wallpaper_themes_dir="${WALL_THEMES_DIR:-"$HOME/.wallpaper-themes"}"
+wallpaper_themes_base_dir="/etc/themes/wallpapers"
+wallpaper_themes_user_dir="${WALL_THEMES_DIR:-"$HOME/.wallpaper-themes"}"
 thumbnail_cache_dir="$HOME/.cache/themes/thumbnails"
 current_theme="$(theme current)"
 
@@ -14,11 +14,25 @@ launch_rofi () {
   printf "%s\n" "${options[@]}" |
     while read -r theme_name; do
       theme="${theme_map[$theme_name]}"
-      wallpaper_dir="$wallpaper_themes_dir/$theme/wallpaper"
-      random_wall="$wallpaper_dir/$(random-file "$wallpaper_dir")"
+      get_random_wall "$theme"
       thumbnail="$(gen-thumbnail "$random_wall" "$thumbnail_cache_dir")"
       echo -en "$theme_name\x00icon\x1f$thumbnail\n"
     done | $rofi_cmd -selected-row "${selected_index:-0}"
+}
+
+get_random_wall () {
+  theme="$1"
+
+  # use user dir if not empty
+  wallpaper_dir="$wallpaper_themes_user_dir/$theme/wallpaper"
+  if [ -d "$wallpaper_dir" ] && [ -n "$(ls -A "$wallpaper_dir")" ]; then
+    wallpaper_themes_dir="$wallpaper_themes_user_dir"
+  else
+    wallpaper_themes_dir="$wallpaper_themes_base_dir"
+  fi
+
+  wallpaper_dir="$wallpaper_themes_dir/$theme/wallpaper"
+  random_wall="$wallpaper_dir/$(random-file "$wallpaper_dir")"
 }
 
 usage () {
