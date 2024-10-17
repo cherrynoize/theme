@@ -52,7 +52,7 @@ EOF
 }
 
 case "$1" in
-  help)
+  help|-h|--help)
     usage
     exit
     ;;
