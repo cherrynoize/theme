@@ -8,12 +8,18 @@ wallpaper_themes_user_dir="${WALL_THEMES_DIR:-"$HOME/.wallpaper-themes"}"
 thumbnail_cache_dir="$HOME/.cache/themes/thumbnails"
 current_theme="$(theme current)"
 wallpaper_base_dir="$wallpaper_themes_base_dir/$current_theme/wallpaper"
+if [ ! -d "$wallpaper_base_dir" ] || [ -z "$(ls -A "$wallpaper_base_dir")" ]; then
+  wallpaper_base_dir=
+fi
 wallpaper_user_dir="$wallpaper_themes_user_dir/$current_theme/wallpaper"
+if [ ! -d "$wallpaper_user_dir" ] || [ -z "$(ls -A "$wallpaper_user_dir")" ]; then
+  wallpaper_user_dir=
+fi
 
 rofi_cmd="rofi -dmenu -i -theme ~/.config/rofi/picker/wall-picker.rasi"
 
 launch_rofi () {
-  for wall in "$wallpaper_base_dir"/* "$wallpaper_user_dir"/*; do
+  for wall in ${wallpaper_base_dir:+"$wallpaper_base_dir"/*} ${wallpaper_user_dir:+"$wallpaper_user_dir"/*}; do
     thumbnail="$(gen-thumbnail "$wall" "$thumbnail_cache_dir")"
     echo -en "$wall\x00icon\x1f$thumbnail\n"
   done | $rofi_cmd -selected-row "${selected_index:-0}"
