@@ -6,7 +6,7 @@ WALLS_BASE_DIR := wallpaper-themes
 # Define install paths
 THEMES_INSTALL_DIR := /etc/themes
 BIN_INSTALL_DIR := /usr/local/bin
-WALLS_INSTALL_DIR := /etc/themes/wallpapers
+WALLS_INSTALL_DIR := $(THEMES_INSTALL_DIR)/wallpapers
 
 # List of files to install
 THEMES_FILES := $(wildcard $(BASE_THEMES_DIR)/*)
@@ -30,6 +30,7 @@ install-wallpapers:
 	# Install wallpapers
 	mkdir -p $(WALLS_INSTALL_DIR) || true
 	cp -r $(WALL_FILES) $(WALLS_INSTALL_DIR)
+	chmod -R 777 $(WALLS_INSTALL_DIR)
 
 install-themes:
 	# Install themes
@@ -62,4 +63,3 @@ remove-themes:
 remove-binaries:
 	# Remove binaries
 	rm -f $(foreach file,$(BIN_FILES),$(BIN_INSTALL_DIR)/$(notdir $(file)))
-	rmdir $(BIN_INSTALL_DIR) || true
