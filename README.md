@@ -50,7 +50,11 @@ yay -S wpgtk pywalfox
 git clone https://github.com/cherrynoize/theme
 cd theme
 make clean install
+genthumbcache
 ```
+
+Running `genthumbcache` with root privileges may fail and is
+not advised.
 
 If you only want to install binaries or themes, respectively:
 

@@ -33,7 +33,8 @@ if [ ! -d "$thumbnail_cache_dir" ]; then
 fi
 
 if [ ! -f "$thumbnail_file" ]; then
-  convert -strip "$source_img" \
+  magick "$source_img" \
+    -strip \
     -thumbnail "$thumbnail_res"^ \
     -extent "$thumbnail_res" \
     -gravity center \

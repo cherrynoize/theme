@@ -29,6 +29,7 @@ declare -a all_ctxs=(
   "rofi-colors"
   "bspwm"
   "bspwm-colors"
+  "hyprland"
   "alacritty"
   "dunst"
 )
@@ -431,6 +432,12 @@ case "$_ctx" in
     active_theme_link_names=("current")
     theme_exts=("")
     post_exec+="bspc wm -r;"
+    ;;
+  hyprland)
+    themes_dir="$HOME/.config/hypr/themes"
+    active_theme_link_names=("current")
+    theme_exts=("")
+    post_exec+="hyprctl reload;"
     ;;
   alacritty)
     themes_dir="$HOME/.config/alacritty/themes"
