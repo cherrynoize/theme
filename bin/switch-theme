@@ -439,6 +439,12 @@ case "$_ctx" in
     theme_exts=("")
     post_exec+="hyprctl reload;"
     ;;
+  hyprland-colors)
+    themes_dir="$HOME/.config/hypr/colors"
+    active_theme_link_names=("current")
+    theme_exts=("")
+    post_exec+="hyprctl reload;"
+    ;;
   alacritty)
     themes_dir="$HOME/.config/alacritty/themes"
     active_theme_link_names=("current")
