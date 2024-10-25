@@ -138,7 +138,15 @@ wall="$(basename "$wall_path")"
 wpg -a "$wall_path" # add wallpaper
 wpg -R "$wall" # reset wallpaper and regenerate colorscheme
 wpg -s "$wall" # set wallpaper and colorscheme
-[ "$(get-display-server)" = "wayland" ] && swww img "$wall_path" # set wallpaper for wayland
+
+# set wallpaper for wayland
+get_display_server () {
+  loginctl \
+    show-session $(awk '/tty/ {print $1}' <(loginctl)) \
+    -p Type | awk -F= '{print $2}'
+}
+display_server="${XDG_SESSION_TYPE:-"$(get-dpy-srv)"}"
+[ "$display_server" = "wayland" ] && swww img "$wall_path"
 
 update_wall_symlink "$wall_link" # update link to current wallpaper
 [ -n "$ff_wall_link" ] && update_ff_wall_link "$ff_wall_link" # update link to wallpaper in ff
