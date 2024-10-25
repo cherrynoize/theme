@@ -145,7 +145,7 @@ get_display_server () {
     show-session $(awk '/tty/ {print $1}' <(loginctl)) \
     -p Type | awk -F= '{print $2}'
 }
-display_server="${XDG_SESSION_TYPE:-"$(get-dpy-srv)"}"
+display_server="$(get_display_server)"
 [ "$display_server" = "wayland" ] && swww img "$wall_path"
 
 update_wall_symlink "$wall_link" # update link to current wallpaper
