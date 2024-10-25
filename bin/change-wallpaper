@@ -73,10 +73,10 @@ while [ -n "$1" ]; do
     -l|--list)
       cmd=list
       ;;
-    -R|--random)
+    -r|--random)
       cmd=random
       ;;
-    -r|--reload)
+    -R|--reload)
       cmd=set
       wall="$current_wall"
       ;;
