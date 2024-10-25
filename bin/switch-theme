@@ -445,6 +445,12 @@ case "$_ctx" in
     theme_exts=("")
     post_exec+="hyprctl reload;"
     ;;
+  waybar)
+    themes_dir="$HOME/.config/waybar/themes"
+    active_theme_link_names=("current")
+    theme_exts=("")
+    post_exec+=""
+    ;;
   alacritty)
     themes_dir="$HOME/.config/alacritty/themes"
     active_theme_link_names=("current")
