@@ -6,9 +6,10 @@
 wallpaper_themes_base_dir="/etc/themes/wallpapers"
 wallpaper_themes_user_dir="${WALL_THEMES_DIR:-"$HOME/.wallpaper-themes"}"
 thumbnail_cache_dir="$HOME/.cache/themes/thumbnails"
+rofi_styles_dir="/etc/themes/rofi"
 current_theme="$(theme current)"
 
-rofi_cmd="rofi -dmenu -i -theme ~/.config/rofi/picker/theme-picker.rasi"
+rofi_cmd="rofi -dmenu -i -theme ${rofi_styles_dir}/theme-picker.rasi"
 
 launch_rofi () {
   printf "%s\n" "${options[@]}" |

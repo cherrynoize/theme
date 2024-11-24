@@ -6,6 +6,7 @@
 wallpaper_themes_base_dir="/etc/themes/wallpapers"
 wallpaper_themes_user_dir="${WALL_THEMES_DIR:-"$HOME/.wallpaper-themes"}"
 thumbnail_cache_dir="$HOME/.cache/themes/thumbnails"
+rofi_styles_dir="/etc/themes/rofi"
 current_theme="$(theme current)"
 wallpaper_base_dir="$wallpaper_themes_base_dir/$current_theme/wallpaper"
 if [ ! -d "$wallpaper_base_dir" ] || [ -z "$(ls -A "$wallpaper_base_dir")" ]; then
@@ -16,7 +17,7 @@ if [ ! -d "$wallpaper_user_dir" ] || [ -z "$(ls -A "$wallpaper_user_dir")" ]; th
   wallpaper_user_dir=
 fi
 
-rofi_cmd="rofi -dmenu -i -theme ~/.config/rofi/picker/wall-picker.rasi"
+rofi_cmd="rofi -dmenu -i -theme ${rofi_styles_dir}/wall-picker.rasi"
 
 launch_rofi () {
   for wall in ${wallpaper_base_dir:+"$wallpaper_base_dir"/*} ${wallpaper_user_dir:+"$wallpaper_user_dir"/*}; do
