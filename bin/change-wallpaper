@@ -59,9 +59,7 @@ update_wall_symlink () {
 
 # update ff wallpaper
 update_ff_wall_link () {
-  [ -e "$1" ] && rm "$1"
-  [ -L "$wall_path" ] && rm "$wall_path"
-  ln -s "$wall_path" "$1"
+  ln -sf "$wall_path" "$1"
 }
 
 cd "$working_dir" || {
