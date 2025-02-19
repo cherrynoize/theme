@@ -73,7 +73,7 @@ context (*e.g: notifications*).
 ### 🌞 Light mode
 
 <details>
-<summary>All themes also have a light mode available *(click for preview)*</summary>
+<summary>All themes also have a light mode available <i>(click for preview)</i></summary>
 
 | Sosuke (light) |
 |:-:|
