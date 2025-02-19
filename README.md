@@ -72,11 +72,14 @@ context (*e.g: notifications*).
 
 ### 🌞 Light mode
 
-All themes also have a light mode available:
+<details>
+<summary>All themes also have a light mode available</summary>
 
 | Sosuke (light) |
 |:-:|
 |<img src="preview/sosuke-light1.png" align="center">|
+
+</details>
 
 > Screenshots may not always be up-to-date. You can check themes out by running
 > `theme-picker`.
