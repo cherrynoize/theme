@@ -476,7 +476,7 @@ case "$_ctx" in
   kitty)
     themes_dir="$HOME/.config/kitty/themes"
     active_theme_link_names=("current")
-    theme_exts=("")
+    theme_exts=(".conf")
     ;;
   notifications|dunst)
     themes_dir="$HOME/.config/dunst/themes"
