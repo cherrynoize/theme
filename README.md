@@ -22,8 +22,62 @@ context (*e.g: notifications*).
 
 ## 🎨 Default themes
 
-> This section is currently a stub... Please, come back later.
-> You can check themes out by running `theme-picker`.
+| Ai |
+|:-:|
+|<img src="preview/ai1.png" align="center">|
+
+| Akane |
+|:-:|
+|<img src="preview/akane1.png" align="center">|
+
+| Ishida |
+|:-:|
+|<img src="preview/ishida1.png" align="center">|
+
+| Mayuri |
+|:-:|
+|<img src="preview/mayuri1.png" align="center">|
+
+| Meranii |
+|:-:|
+|<img src="preview/meranii1.png" align="center">|
+
+| Misato |
+|:-:|
+|<img src="preview/misato1.png" align="center">|
+
+| Nina |
+|:-:|
+|<img src="preview/nina1.png" align="center">|
+
+| Sakura |
+|:-:|
+|<img src="preview/sakura1.png" align="center">|
+
+| Shina |
+|:-:|
+|<img src="preview/shina1.png" align="center">|
+
+| Shinji |
+|:-:|
+|<img src="preview/shinji1.png" align="center">|
+
+| Shoko |
+|:-:|
+|<img src="preview/shoko1.png" align="center">|
+
+| Sosuke |
+|:-:|
+|<img src="preview/sosuke1.png" align="center">|
+
+All themes also have a light mode available:
+
+| Sosuke (light) |
+|:-:|
+|<img src="preview/sosuke-light1.png" align="center">|
+
+> Screenshots may not always be up-to-date. You can check themes out by running
+> `theme-picker`.
 
 ## 🧱 Dependencies
 
