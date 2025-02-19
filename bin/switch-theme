@@ -31,6 +31,7 @@ declare -a all_ctxs=(
   "bspwm-colors"
   "hyprland"
   "alacritty"
+  "kitty"
   "dunst"
 )
 
@@ -469,6 +470,11 @@ case "$_ctx" in
     ;;
   alacritty)
     themes_dir="$HOME/.config/alacritty/themes"
+    active_theme_link_names=("current")
+    theme_exts=("")
+    ;;
+  kitty)
+    themes_dir="$HOME/.config/kitty/themes"
     active_theme_link_names=("current")
     theme_exts=("")
     ;;
