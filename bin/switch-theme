@@ -30,6 +30,7 @@ declare -a all_ctxs=(
   "bspwm"
   "bspwm-colors"
   "hyprland"
+  "swaylock"
   "alacritty"
   "kitty"
   "dunst"
@@ -450,6 +451,12 @@ case "$_ctx" in
     active_theme_link_names=("current")
     theme_exts=("")
     post_exec+="hyprctl reload;"
+    ;;
+  swaylock)
+    themes_dir="$HOME/.config/swaylock/themes"
+    active_theme_link_names=("current")
+    theme_exts=("")
+    post_exec+=""
     ;;
   hyprland-colors)
     themes_dir="$HOME/.config/hypr/colors"
