@@ -90,8 +90,8 @@ specify custom paths by defining a `BASE_THEMES_DIR` and
 >you can set these in the [`.initrc`](.initrc) file.
 
 Though provided global themes are still very simple, the
-infrastructure is already capable of supporting endlessly
-complex themes. You just need to set them up.
+infrastructure is already capable of supporting
+complex themes. You just need to define them.
 
 ### Context themes
 
@@ -200,15 +200,14 @@ Some text visibility issues in light mode.
 
 ## 📋 TODO
 
-- Implement wallpaper history for each theme and start sorting
+- Implement wallpaper history for each theme and default to sorting
 by most recent in `wall-picker`
-- Convert to a higher compression format
+- Convert to higher compression format
 - AI upscaler on-the-fly with cache storage support
 - Some wallpapers have some ugly artifacts/watermarks to be
 removed
 - Cut out border from wallpapers in
 [`meranii`](../.wallpaper-themes/meranii) theme
-
 - Make `switch-mode` keep both `-dark` and `-light` versions
 and use a suffix-less link to avoid this dizzy switching back
 and forth in commits just because a different mode is set.
