@@ -129,8 +129,9 @@ set_theme () {
     remove_active_theme_link
 
     # point link to new theme
-    echo setting: 'ln -s' "${themes_dir:+"$themes_dir/"}$(get_new_theme_with_ext)" "$active_theme_link"
-    ln -s "${themes_dir:+"$themes_dir/"}$(get_new_theme_with_ext)" "$active_theme_link"
+    echo "setting theme '$new_theme_name' for '$_ctx'..."
+    cd "$themes_dir" > /dev/null
+    ln -s "$(get_new_theme_with_ext)" "$active_theme_link"
   }
 
   enforce_old_theme_mode () {
