@@ -70,6 +70,8 @@ context (*e.g: notifications*).
 |:-:|
 |<img src="preview/sosuke1.png" align="center">|
 
+### 🌞 Light mode
+
 All themes also have a light mode available:
 
 | Sosuke (light) |
