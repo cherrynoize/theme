@@ -85,6 +85,10 @@ while [ -n "$1" ]; do
     -v|--verbose)
       verbose=1
       ;;
+    -*)
+      echo "error: unknown option '$1'"
+      exit 1
+      ;;
     *)
       cmd=set
       wall="$1" # set wallpaper name
