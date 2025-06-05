@@ -12,15 +12,42 @@
 
 <div align="justify">
 
-**Theme** is a set of utilities for handling custom themes
-within your system. **Global themes** are defined by *ini*
-configuration files which define specifics adopted system-wide,
-including **context themes** which are themes for a specific
-context (*e.g: notifications*).
+**Theme** is a toolset for managing user-defined system-wide custom themes,
+aiming to unify multiple scattered configuration files into simple
+human-readable *.ini* theme files. Each **global theme** defines specifics
+adopted system-wide, while **context themes** configure specific applications
+(*e.g: notifications*).
 
 </div>
 
+## 📝 Example syntax
+
+```
+[WM]
+top-padding = 10
+left-padding = 10
+right-padding = 10
+bottom-padding = 10
+
+useless-gaps = 5
+border-width = 1
+border-radius = 10
+
+[Dock]
+enabled = true
+position = top
+depth = 0
+margin = 0
+negative-margin = 0
+```
+
+You can check out [the defaults file](./base-themes/.default.ini) from the
+[*base-themes*](./base-themes) dir for a full example.
+
 ## 🎨 Default themes
+
+**Theme** comes with a number of default themes. You can overwrite default options
+for any of these or start by creating your own from scratch.
 
 | Ai |
 |:-:|
@@ -73,7 +100,7 @@ context (*e.g: notifications*).
 ### 🌞 Light mode
 
 <details>
-<summary>All themes also have a light mode available <i>(click for preview)</i></summary>
+<summary>All themes also come with a light mode by default <i>(click for preview)</i></summary>
 
 | Sosuke (light) |
 |:-:|
@@ -81,8 +108,8 @@ context (*e.g: notifications*).
 
 </details>
 
-> Screenshots may not always be up-to-date. You can check themes out by running
-> `theme-picker`.
+> Screenshots may not always be up-to-date. You can check installed themes
+> by running `theme-picker`.
 
 ## 🧱 Dependencies
 
