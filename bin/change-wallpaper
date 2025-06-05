@@ -140,9 +140,7 @@ wall="$(basename "$wall_path")"
 
 wpg -a "$wall_path" # add wallpaper
 wpg -R "$wall" # reset wallpaper and regenerate colorscheme
-notify-send 1
 wpg -s "$wall" # set wallpaper and colorscheme
-notify-send 2
 ~/.config/hypr/scripts/readglobaltheme.sh # hyprland live config needs to be reset
 
 # set wallpaper for wayland
