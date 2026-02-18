@@ -104,7 +104,7 @@ case "$cmd" in
     ;;
   ""|random)
     if [ ! -d "$wallpaper_dir" ]; then
-      echo "error: no wallpaper theme currently set"
+      echo "error: wallpaper theme directory '$wallpaper_dir' not found"
       echo "try running \`switch-theme wallpaper [theme]\`"
       notification "No wallpaper theme"
       exit 5

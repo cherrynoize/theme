@@ -131,8 +131,7 @@ set_theme () {
 
     # point link to new theme
     echo "setting theme '$new_theme_name' for '$_ctx'..."
-    cd "$themes_dir" > /dev/null
-    ln -s "$(get_new_theme_with_ext)" "$active_theme_link"
+    ln -s "$themes_dir/$(get_new_theme_with_ext)" "$active_theme_link"
   }
 
   enforce_old_theme_mode () {
@@ -548,18 +547,3 @@ else
 fi
 
 terminate
-
-# TODO
-# - global theme abstraction layer like in switch-mode
-# - global themes that define which themes are set for each
-#   context separately
-#   - listed with -g -l
-#   - set with -g [theme] like any other theme
-# - optional theme option to toggle command to toggle
-#   between last two themes only if either is given
-#   theme, otherwise set given theme
-# - prev and next options (then uncomment sxhkdrc shortcut)
-# - modular structure making it easy to add/remove themes defined
-#   in conf files (also providing theme name to be read from
-#   selector - if not provided defaults to name currently used)
-# - add rename (current) theme option
