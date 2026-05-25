@@ -140,8 +140,10 @@ wall="$(basename "$wall_path")"
 
 wpg -a "$wall_path" # add wallpaper
 wpg -R "$wall" # reset wallpaper and regenerate colorscheme
-wpg -s "$wall" # set wallpaper and colorscheme
-~/.config/hypr/scripts/readglobaltheme.sh # hyprland live config needs to be reset
+(
+  wpg -s "$wall" # set wallpaper and colorscheme
+  ~/.config/hypr/scripts/readglobaltheme.sh # hyprland live config needs to be reset
+)& # bug fix for running from places like waybar
 
 # set wallpaper for wayland
 get_display_server () {
@@ -158,13 +160,10 @@ update_wall_symlink "$wall_link" # update link to current wallpaper
 # update firefox colorscheme
 pywalfox update&
 
-# update screenlock wallpaper cache
-n3lock -w "$wall_path"&
-
 # TODO
 # - auto-check wpgtk wallpapers cache for size or number of files
 #   and remove older ones
 #
 # BUGS
 # - seems not to work with filenames containing spaces, but I
-#   believe it might be wpgtk, not us (testing needed)
+#   believe it might be a wpgtk issue (testing needed)
