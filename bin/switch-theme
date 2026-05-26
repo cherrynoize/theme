@@ -451,19 +451,19 @@ case "$_ctx" in
     theme_exts=("")
     post_exec+="hyprctl reload;"
     ;;
-  swaylock)
-    themes_dir="$HOME/.config/swaylock/themes"
-    active_theme_link_names=("current")
-    theme_exts=("")
-    post_exec+=""
-    ;;
   hyprland-colors)
     themes_dir="$HOME/.config/hypr/colors"
     active_theme_link_names=("current")
     theme_exts=("")
     post_exec+="hyprctl reload;"
     ;;
-  waybar)
+  swaylock)
+    themes_dir="$HOME/.config/swaylock/themes"
+    active_theme_link_names=("current")
+    theme_exts=("")
+    post_exec+=""
+    ;;
+  waybar-themes)
     themes_dir="$HOME/.config/waybar/themes"
     active_theme_link_names=("current")
     theme_exts=("")
