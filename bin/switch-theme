@@ -131,7 +131,8 @@ set_theme () {
 
     # point link to new theme
     echo "setting theme '$new_theme_name' for '$_ctx'..."
-    ln -s "$themes_dir/$(get_new_theme_with_ext)" "$active_theme_link"
+    cd "$themes_dir" || exit 4
+    ln -s "$(get_new_theme_with_ext)" "$active_theme_link"
   }
 
   enforce_old_theme_mode () {
