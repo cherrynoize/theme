@@ -131,19 +131,15 @@ close_dock () {
   fi
 }
 
-close_all () {
-  close_eww
-  close_polybar
-  close_waybar
+toggle_waybar () {
+  pkill -USR1 waybar
 }
 
 close_eww () {
-  # first close dock then remove the gap
   close_dock eww "$eww_dir/launch.sh close"
 }
 
 close_polybar () {
-  # first close dock then remove the gap
   close_dock polybar "polybar-msg cmd quit"
 }
 
@@ -151,13 +147,19 @@ close_waybar () {
   close_dock waybar
 }
 
+close_all () {
+  close_eww
+  close_polybar
+  close_waybar
+}
+
 toggle_dock () {
-  if running_polybar; then
+  if running_waybar; then
+    toggle_waybar
+  elif running_polybar; then
     close_polybar
   elif running_eww; then
     close_eww
-  elif running_waybar; then
-    close_waybar
   else
     last_bar="$(cat "$hst_file")"
     if [ -n "$last_bar" ]; then
