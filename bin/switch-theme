@@ -123,7 +123,7 @@ set_theme () {
   old_theme_mode="$(switch-mode "$_ctx" -c)"
 
   get_new_theme_with_ext () {
-    echo "${new_theme_with_ext:-"$new_theme_name$theme_ext"}"
+    echo "${active_theme_link_dir:+"${themes_dir}/"}${new_theme_with_ext:-"$new_theme_name$theme_ext"}"
   }
 
   update_theme_link () {
@@ -131,7 +131,7 @@ set_theme () {
 
     # point link to new theme
     echo "setting theme '$new_theme_name' for '$_ctx'..."
-    cd "$themes_dir" || exit 4
+    cd "${active_theme_link_dir:-"$themes_dir"}" || exit 4
     ln -s "$(get_new_theme_with_ext)" "$active_theme_link"
   }
 
@@ -179,7 +179,7 @@ set_theme () {
     # if new theme is not in exclude_ctxs
     if [ -n "$new_theme_name" ] &&
       [ "${exclude_ctxs[$_ctx]}" != "true" ] &&
-      [ ! -e "${themes_dir:-"$themes_dir"}/$(get_new_theme_with_ext)" ]; then
+      [ ! -e "$(get_new_theme_with_ext)" ]; then
           echo "$(basename -- "$0"): could not find theme '$new_theme_name'"
           exit 3
     fi
